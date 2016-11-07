@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="index">
+    <img src="../assets/logo.png">
     <hello></hello>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Hello from './Hello'
 
 export default {
-  name: 'app',
+  name: 'index',
   components: {
     Hello
   }
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style>
-#app {
+#index {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

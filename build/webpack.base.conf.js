@@ -10,10 +10,14 @@ var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
+var glob = require('glob'); // 这里的glob是nodejs的glob模块，是用来读取webpack入口目录文件的
+var entries = getEntry('./src/module/**/*.js'); // 获得入口js文件
+
 module.exports = {
-  entry: {
-    app: './src/main.js'
-  },
+  // entry: {
+  //   app: './src/main.js'
+  // },
+  entry: entries,
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
@@ -91,4 +95,18 @@ module.exports = {
       })
     ]
   }
+}
+
+function getEntry(globPath) {
+  var entries = {},
+    basename, tmp, pathname;
+
+  glob.sync(globPath).forEach(function (entry) {
+    basename = path.basename(entry, path.extname(entry));
+    tmp = entry.split('/').splice(-3);
+    pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径
+    entries[pathname] = entry;
+  });
+  console.log(entries);
+  return entries;
 }

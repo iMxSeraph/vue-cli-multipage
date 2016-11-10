@@ -1,18 +1,18 @@
-# vue-cli-multipage
+# Vue.js+Webpack多页面工程样例
 
 > A simple multipage project
 
-## Build Setup
+## 使用方法
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 在本地 localhost:8080 上启动服务
+# 可以用 module/*.html 访问页面，"*"代表源代码中module下
 npm run dev
 
-# build for production with minification
+# 构建后所有的文件在dist文件夹下
 npm run build
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

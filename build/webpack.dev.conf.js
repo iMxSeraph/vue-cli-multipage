@@ -24,11 +24,21 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    })
   ]
 })
+
+// 读取所有页面入口
+var pages = utils.getEntries('./src/views/**/*.html');
+
+// 逐一进行生成
+for (var pathname in pages) {
+  // 配置生成的html文件，定义路径等
+  var conf = {
+    filename: pathname.split('/')[1] + '.html',
+    template: pages[pathname],  // 模板路径
+    inject: true,               // js插入位置
+    chunks: [pathname]          // 仅嵌入当前目录下JS
+  };
+  // https://github.com/ampedandwired/html-webpack-plugin
+  module.exports.plugins.push(new HtmlWebpackPlugin(conf));
+}

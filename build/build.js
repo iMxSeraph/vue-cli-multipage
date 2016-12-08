@@ -19,7 +19,8 @@ var spinner = ora('building for production...')
 spinner.start()
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
-rm('-rf', assetsPath)
+// 清空整个dist目录
+rm('-rf', config.build.assetsRoot)
 mkdir('-p', assetsPath)
 cp('-R', 'static/*', assetsPath)
 
